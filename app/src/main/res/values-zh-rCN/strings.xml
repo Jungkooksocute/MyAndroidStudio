@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="hello">你好</string>
+    <string name="Button">提交</string>
+    <string name="phonenumber">电话号码</string>
+    <string name="BMI">身体质量指数</string>
+    <string name="weight">体重：</string>
+    <string name="height">身高：</string>
+</resources>
