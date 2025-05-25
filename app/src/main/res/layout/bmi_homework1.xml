@@ -49,7 +49,7 @@
         android:layout_marginTop="40dp"
         android:text="@string/Button"
         android:textColor="#F8E1E1"
-        android:textSize="10dp" />
+        android:textSize="20dp" />
 
     <TextView
         android:id="@+id/result_textview"
