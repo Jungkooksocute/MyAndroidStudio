@@ -7,12 +7,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ABteamScores">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
 
     <!-- TeamA -->
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="593dp"
         android:layout_marginBottom="90dp"
+        android:layout_weight="1"
         android:orientation="vertical"
 
         >
@@ -34,43 +44,54 @@
             android:gravity="center"
             android:layout_gravity="center"
             android:text="0"
-            android:textSize="60sp" />
+            android:textSize="60sp"  />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/btn_a1"
-                android:layout_width="60dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="+1" />
 
             <Button
                 android:id="@+id/btn_a2"
-                android:layout_width="60dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="+2" />
 
             <Button
                 android:id="@+id/btn_a3"
-                android:layout_width="60dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="+3" />
         </LinearLayout>
     </LinearLayout>
 
+        <TextView
+            android:layout_width="3dp"
+            android:layout_height="600dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:background="#9C27B0">
+
+
+        </TextView>
+
 
     <!-- TeamB -->
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="593dp"
         android:layout_marginBottom="90dp"
+        android:layout_weight="1"
         android:orientation="vertical"
 
         >
@@ -81,7 +102,7 @@
             android:layout_height="222dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="TeamA"
+            android:text="TeamB"
             android:textSize="50sp" />
 
         <TextView
@@ -98,25 +119,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/btn_b1"
-                android:layout_width="60dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="+1" />
 
             <Button
                 android:id="@+id/btn_b2"
-                android:layout_width="60dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="+2" />
 
             <Button
                 android:id="@+id/btn_b3"
-                android:layout_width="60dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="+3" />
@@ -124,13 +145,15 @@
     </LinearLayout>
 
 
+</LinearLayout>
+
     <!-- 重置按钮 -->
     <Button
         android:id="@+id/btn_reset"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="RESET"/>
-
+</LinearLayout>
 
 </LinearLayout>
 
