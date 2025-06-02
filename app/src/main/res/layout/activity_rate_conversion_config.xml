@@ -76,5 +76,6 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:text="@string/save"
+        android:onClick="save"
         android:textSize="30dp"/>
 </LinearLayout>

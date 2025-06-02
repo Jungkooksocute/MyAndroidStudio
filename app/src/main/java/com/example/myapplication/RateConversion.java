@@ -5,15 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class RateConversion extends AppCompatActivity {
     private static final String TAG = "RateConversion";
@@ -22,6 +18,10 @@ public class RateConversion extends AppCompatActivity {
     float dollarRate = 34.5f;
     float euroRate = 666.66f;
     float krwRate = 345f;
+
+    private float dollarV;
+    private float euroV;
+    private float krwV;
 
 
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
@@ -68,6 +68,23 @@ public class RateConversion extends AppCompatActivity {
         Log.i(TAG, "clickOpen: euro:"+euroRate);
         Log.i(TAG, "clickOpen: krw:"+krwRate);
 
-        startActivity(intent);
+        //startActivity(intent);
+        startActivityForResult(intent,13);
     }
+
+     @Override
+     protected void onActivityResult(int requestCode, int resultCode,  Intent data) {
+         if (requestCode == 13 && resultCode == 7) {
+             // 从data获取带回的数据
+             Bundle ret = data.getExtras();
+             dollarV = ret.getFloat("save_dollar");
+             euroV = ret.getFloat("save_euro");
+             krwV = ret.getFloat("save_krw");
+             Log.i(TAG, "onActivityResult: dollarRate=" + dollarRate);
+             Log.i(TAG, "onActivityResult: euroRate=" + euroRate);
+             Log.i(TAG, "onActivityResult: wonRate=" + krwRate);
+         }
+         super.onActivityResult(requestCode, resultCode, data);
+     }
+
 }
