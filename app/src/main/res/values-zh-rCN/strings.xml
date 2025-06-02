@@ -7,4 +7,12 @@
     <string name="BMI">身体质量指数</string>
     <string name="weight">体重：</string>
     <string name="height">身高：</string>
+    <string name="inputRMB">请输入人民币：</string>
+    <string name="rate">汇率选择：</string>
+    <string name="rc">汇率转换系统：</string>
+    <string name="dollar">美元</string>
+    <string name="EURO">欧元</string>
+    <string name="KRW">韩元</string>
+    <string name="config">配置</string>
+    <string name="save">保存</string>
 </resources>
