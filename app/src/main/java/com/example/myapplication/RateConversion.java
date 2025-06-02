@@ -2,13 +2,18 @@ package com.example.myapplication;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class RateConversion extends AppCompatActivity {
@@ -31,8 +36,11 @@ public class RateConversion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_rate_conversion);
-
-
+        SharedPreferences rateConversion = getSharedPreferences("rate_conversion", AppCompatActivity.MODE_PRIVATE);
+        PreferenceManager.getDefaultSharedPreferences(this);
+        dollarV=rateConversion.getFloat("dollar",0.1f);
+        euroV=rateConversion.getFloat("euro",0.2f);
+        krwV=rateConversion.getFloat("krw",0.3f);
 
 
     }
@@ -58,7 +66,9 @@ public class RateConversion extends AppCompatActivity {
 
 
     }//
-    public void clickOpen(View n){
+
+    //进入配置页面
+    public void intoConfiguration(){
         Intent intent = new Intent(this, RateConversion_ConfigActivity.class);
         intent.putExtra("dollar_r",dollarRate);
         intent.putExtra("euro_r",euroRate);
@@ -69,7 +79,10 @@ public class RateConversion extends AppCompatActivity {
         Log.i(TAG, "clickOpen: krw:"+krwRate);
 
         //startActivity(intent);
-        startActivityForResult(intent,13);
+        startActivityForResult(intent,13);}
+
+    public void clickOpen(View n){
+        intoConfiguration();
     }
 
      @Override
@@ -87,4 +100,16 @@ public class RateConversion extends AppCompatActivity {
          super.onActivityResult(requestCode, resultCode, data);
      }
 
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.rate_conversion,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.configuration)intoConfiguration();
+        return super.onOptionsItemSelected(item);
+    }
 }

@@ -1,7 +1,10 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.service.voice.VoiceInteractionSession;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -56,6 +59,16 @@ public class RateConversion_ConfigActivity extends AppCompatActivity {
         bundle.putFloat("save_euro",Float.parseFloat(es));
         bundle.putFloat("save_krw",Float.parseFloat(ks));
         intent.putExtras(bundle);
+
+
+        SharedPreferences sh = getSharedPreferences("rate_conversion", AppCompatActivity.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sh.edit();
+        edit.putFloat("dollar",Float.parseFloat(ds));
+        edit.putFloat("euro",Float.parseFloat(es));
+        edit.putFloat("krw",Float.parseFloat(ks));
+
+        edit.apply();
+
 
         setResult(7,intent);
         finish();
