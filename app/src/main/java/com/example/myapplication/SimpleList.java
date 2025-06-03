@@ -113,7 +113,7 @@ public class SimpleList extends AppCompatActivity {
         return currencies;
     }
 
-    @Override
+
     public void onItemClick(Currency currency) {
         // 跳转到计算页面
         Intent intent = new Intent(this, CalculateActivity.class);
