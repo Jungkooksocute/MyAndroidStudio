@@ -33,6 +33,8 @@ android {
 
 dependencies {
 
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("org.jsoup:jsoup:1.17.2")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
