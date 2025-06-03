@@ -1,7 +1,7 @@
 package com.example.myapplication;
 
 import android.annotation.SuppressLint;
-import android.app.DownloadManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -12,18 +12,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -46,12 +43,10 @@ public class SimpleList extends AppCompatActivity {
         recyclerView = findViewById(R.id.currencyRecyclerView);
         progressBar = findViewById(R.id.progressBar);
 
-        // 设置RecyclerView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new CurrencyAdapter(currencyList);
+        adapter = new CurrencyAdapter(currencyList, this);
         recyclerView.setAdapter(adapter);
 
-        // 加载汇率数据
         loadExchangeRates();
     }
 
@@ -79,13 +74,11 @@ public class SimpleList extends AppCompatActivity {
         });
     }
 
-
     private List<Currency> fetchExchangeRates() throws IOException {
         String url = "https://www.huilvbiao.com/bank/spdb";
         List<Currency> currencies = new ArrayList<>();
 
         OkHttpClient client = new OkHttpClient();
-
         Request request = new Request.Builder().url(url).build();
 
         try (Response response = client.newCall(request).execute()) {
@@ -94,19 +87,16 @@ public class SimpleList extends AppCompatActivity {
             }
 
             String html = response.body().string();
+            Document doc = Jsoup.parse(html);
 
-            Document doc = (Document) Jsoup.parse(html);
-
-            Element table = null;
-            doc.setTextContent("table.table.table-hover");
+            // 查找包含汇率的表格
+            Element table = doc.select("table.table.table-hover").first();
             if (table != null) {
-                Elements rows = null;
-                table.setTextContent("tr");
+                Elements rows = table.select("tr");
 
                 for (int i = 1; i < rows.size(); i++) {
-                    Element row = (Element) rows.get(i);
-                    Elements columns = null;
-                    row.setTextContent("td");
+                    Element row = rows.get(i);
+                    Elements columns = row.select("td");
 
                     if (columns.size() >= 5) {
                         String name = columns.get(0).text().trim();
@@ -121,6 +111,15 @@ public class SimpleList extends AppCompatActivity {
         }
 
         return currencies;
+    }
+
+    @Override
+    public void onItemClick(Currency currency) {
+        // 跳转到计算页面
+        Intent intent = new Intent(this, CalculateActivity.class);
+        intent.putExtra("currency_name", currency.getName());
+        intent.putExtra("exchange_rate", currency.getRate());
+        startActivity(intent);
     }
 
     @Override

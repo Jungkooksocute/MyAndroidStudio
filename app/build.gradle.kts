@@ -35,6 +35,10 @@ dependencies {
 
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("org.jsoup:jsoup:1.17.2")
+    implementation("androidx.appcompat:appcompat:1.6.1")
+    implementation("com.google.android.material:material:1.11.0")
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.activity)
